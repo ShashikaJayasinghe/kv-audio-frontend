@@ -2,24 +2,33 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaEdit, FaTrash, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminItemsPage() {
+
   const [items, setItems] = useState([]);
+  const [itemsLoaded, setItemsLoaded] = useState(false); 
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:3000/api/products", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setItems(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+
+    if (!itemsLoaded) {
+            const token = localStorage.getItem("token");
+            axios.get("http://localhost:3000/api/products", {
+            headers: { Authorization: `Bearer ${token}` },
+        }).then((res) => {
+
+            console.log(res.data)
+            setItems(res.data);
+            setItemsLoaded(true)        //items are loaded
+            
+        }
+        ).catch((err) => {
+            console.error(err);
+        });
+    }
+    
+  }, [itemsLoaded]);
 
   const handleDelete = (key) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
@@ -29,7 +38,7 @@ export default function AdminItemsPage() {
             headers : { Authorization: `Bearer ${token}` },
         }).then((res)=>{
             console.log(res.data);
-            window.location.reload();
+            setItemsLoaded(false);
         }).catch ((err)=>{
             console.log(err);
         })
@@ -37,10 +46,11 @@ export default function AdminItemsPage() {
   };
 
   return (
-    <div className="w-full min-h-screen p-6 bg-gray-100">
-      <div className="overflow-x-auto bg-white shadow-lg rounded-lg p-4">
-        <table className="w-full border-collapse">
-          <thead>
+    <div className="w-full h-full p-4 bg-gray-100 relative flex items-center flex-col">
+        {!itemsLoaded && <div className=" border-4 my-4 border-b-green-500 rounded-full animate-spin w-[100px] h-[100px]"></div>}
+      {itemsLoaded && <div className="overflow-x-auto bg-white shadow-lg rounded-lg p-4">
+        <table className="w-full max-w-full border-collapse border-gray-30">
+          <thead className="bg-gray-100">
             <tr className="bg-gray-200 text-gray-700">
               <th className="p-3 text-left">Key</th>
               <th className="p-3 text-left">Name</th>
@@ -63,18 +73,25 @@ export default function AdminItemsPage() {
                   {product.availability ? "Available" : "Not Available"}
                 </td>
                 <td className="p-3 flex justify-center gap-4">
-                  <Link to={`/admin/items/edit/${product.key}`} className="text-blue-500 hover:text-blue-700 rounded transition">
-                    <FaEdit size={18} className="inline mr-1" />Edit
-                  </Link>
+
+                    <button className="text-blue-500 hover:text-blue-700 rounded transition" onClick={(()=>{
+                        navigate(`/admin/items/edit`, {state:product})
+                    })}>
+                        <FaEdit size={18} className="inline mr-1" />Edit
+                    </button>
+
                   <button onClick={() => handleDelete(product.key)} className="text-red-500 hover:text-red-700 rounded transition">
                     <FaTrashAlt size={18} className="inline mr-1" /> Delete
                   </button>
+
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </div>}       
+
+
       <Link to="/admin/items/add" className="fixed bottom-4 right-4 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-800 transition-all">
         <CiCirclePlus size={50} />
       </Link>

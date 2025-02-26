@@ -4,6 +4,7 @@ import { MdOutlineRateReview, MdSpeaker } from "react-icons/md";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminItemsPage from "./adminItems";
 import AddItemPage from "./addItemPage";
+import UpdateItemPage from "./updateItemPage";
 
 export default function AdminPage () {
     return (
@@ -21,6 +22,7 @@ export default function AdminPage () {
           <Route path="/bookings" element={<h1>Booking Page</h1>}></Route>
           <Route path="/items" element={<AdminItemsPage />}></Route>
           <Route path="/items/add" element={<AddItemPage />}/>
+          <Route path="/items/edit" element={<UpdateItemPage />} />
         
         </Routes>
       </div>

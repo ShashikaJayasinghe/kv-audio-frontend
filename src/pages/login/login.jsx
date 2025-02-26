@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import "./login.css"
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,9 +18,10 @@ export default function LoginPage () {
             console.log(res);
             toast.success("Login Success");
             const user = res.data.user;
+            localStorage.setItem("token", res.data.token);        //token save when login a user
 
             if (user.role === "admin") {
-                navigate("/admin");
+                navigate("/admin/");
             }else {
                 navigate("/");
             }

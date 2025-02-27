@@ -23,8 +23,7 @@ export default function UpdateItemPage() {
 
     if (token) {
         try{
-            const result = await axios.post("http://localhost:3000/api/products",{
-                key : productKey,
+            const result = await axios.put("http://localhost:3000/api/products/"+productKey,{
                 name : productName,
                 price : productPrice,
                 category : productCategory,
@@ -55,7 +54,7 @@ export default function UpdateItemPage() {
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <h1 className="text-2xl font-bold mb-6">Update Item</h1>
       <div className="w-[400px] p-6 shadow-lg bg-white rounded-2xl border flex flex-col gap-4">
-        <input className="p-2 border rounded-lg" type="text" placeholder="Product Key" value={productKey} onChange={(e) => setProductKey(e.target.value)} />
+        <input disabled className="p-2 border rounded-lg" type="text" placeholder="Product Key" value={productKey} onChange={(e) => setProductKey(e.target.value)} />
         <input className="p-2 border rounded-lg" type="text" placeholder="Product Name" value={productName} onChange={(e) => setProductName(e.target.value)} />
         <input className="p-2 border rounded-lg" type="number" placeholder="Product Price" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
         <select className="p-2 border rounded-lg" onChange={(e) => setProductCategory(e.target.value)} value={productCategory}>
@@ -63,7 +62,7 @@ export default function UpdateItemPage() {
           <option value="lights">Lights</option>
         </select>
         <input className="p-2 border rounded-lg" type="text" placeholder="Product Dimensions" value={productDimension} onChange={(e) => setProductDimension(e.target.value)} />
-        <input className="p-2 border rounded-lg" type="text" placeholder="Product Description" value={productDescription} onChange={(e) => setProductDescription(e.target.value)} />
+        <textarea className="p-2 border rounded-lg" type="text" placeholder="Product Description" value={productDescription} onChange={(e) => setProductDescription(e.target.value)} />
         <button onClick={handleAddItem} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl">Add</button>
         <button onClick={()=>{navigate("/admin/items/")}} className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl">Cancel</button>
       </div>

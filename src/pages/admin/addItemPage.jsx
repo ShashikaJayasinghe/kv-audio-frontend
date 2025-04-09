@@ -17,43 +17,61 @@ export default function AddItemPage() {
   async function handleAddItem () {
     const promises = []
 
-    for (let i = 0; i < productImages.length; i++) {
-      console.log(productImages[i]);
-      const promise = mediaUpload(productImages[i]);
+    for (let i = 0; i<productImages.length; i++) {
+      console.log(productImages[i])
+      const promise = mediaUpload(productImages[i])
       promises.push(promise);
+      // if (i == 5) {
+      //   toast.error("You can only upload 5 pictures at a time");
+      //   break;
+      // }
     }
-    
+
+    // Promise.all(promises).then((result)=>{
+    //   console.log(result)
+    // }).catch((err)=>{
+    //   toast.error(err)
+    // })
 
     console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
-    // const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token")
 
-    // if (token) {
-    //     try{
-    //         const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
-    //             key : productKey,
-    //             name : productName,
-    //             price : productPrice,
-    //             category : productCategory,
-    //             dimensions : productDimension,
-    //             description : productDescription
-    //         },
-    //         {
-    //             headers : {
-    //                 Authorization : "Bearer " + token,
-    //             },
-    //         }
-    //       );
-    //         toast.success(result.data.message);
-    //         navigate("/admin/items");
+    if (token) {
+        try{
+            // Promise.all(promises).then((result)=>{
+            //   console.log(result)
+            // }).catch((err)=>{
+            //     toast.error(err)
+            // })
+            
+            const imageUrls = await Promise.all(promises);
 
-    //     }catch (err) {
-    //         console.log(err)
-    //         toast.error(err.response.data.error);
-    //     } 
+            const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
+                key : productKey,
+                name : productName,
+                price : productPrice,
+                category : productCategory,
+                dimensions : productDimension,
+                description : productDescription,
+                image : imageUrls,
+            },
+            {
+                headers : {
+                    Authorization : "Bearer " + token,
+                },
+            }
+          );
+            toast.success(result.data.message);
+            navigate("/admin/items");
+
+        }catch (err) {
+            console.log(err)
+            toast.error(err.response.data.error);
+        } 
         
-    // }else {
-    //     toast.error("You are not authorized to add items")
-    // }
+    }else {
+        toast.error("You are not authorized to add items")
+    }
 
   }
 

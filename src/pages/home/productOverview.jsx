@@ -10,11 +10,27 @@ export default function ProductOverview(){
 
 
     useEffect(()=>{
-        axios
-    })
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`).then((res)=>{
+            setProduct(res.data);
+            setLoadingStatus("loaded");
+            console.log(res.data);
+        }).catch((err)=>{
+            console.error(err);
+            setLoadingStatus("error");
+        })
+    },[])
     return (
-        <div>
-            <h1>Product Overview</h1>
+        <div className="w-full h-full flex justify-center">
+            {
+                loadingStatus == "loading" && <div className="w-full h-full flex justify-center items-center">
+                        <div className="w-[70px] h-[70px] border-b-2 border-b-accent animate-spin rounded-full"></div>
+                    </div>
+            }
+            {
+                loadingStatus == "loaded" && <div className="w-full h-full flex justify-center items-center">
+
+                </div>
+            }
         </div>
     )
 }

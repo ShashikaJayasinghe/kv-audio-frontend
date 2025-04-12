@@ -43,6 +43,11 @@ export default function ProductOverview(){
                     </div>
                 </div>
             }
+            {
+                loadingStatus == "error" && <div className="w-full h-full flex justify-center items-center">
+                    <h1 className="text-3xl font-bold text-accent">Error Occured</h1>
+                </div>
+            }
         </div>
     )
 }

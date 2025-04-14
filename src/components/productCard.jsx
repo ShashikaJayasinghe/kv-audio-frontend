@@ -23,7 +23,7 @@ export default function ProductCard({ item }) {
                         className={`h-[40px] w-full absolute left-0 bottom-0 py-3 rounded-lg text-white font-semibold transition duration-300 flex items-center justify-center gap-2 ${item.availability ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
                         disabled={!item.availability}
                     >
-                        {item.availability ? '🛒 View details' : '🚫 Sold Out'}
+                        {item.availability ? '🛒 Add to Cart' : '🚫 Sold Out'}
                     </Link>
                 </div>
                 

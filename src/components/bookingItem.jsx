@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { removeFromCart } from "../utils/cart";
-import { FaTrash } from "react-icons/fa";
+import { addToCart, removeFromCart } from "../utils/cart";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 
 export default function BookingItem(props) {
   const { itemKey, qty, refresh } = props;
@@ -22,7 +22,7 @@ export default function BookingItem(props) {
           refresh();
         });
     }
-  }, [status]);
+  }, [status]);   //useEffect will run when status changes. depending on status we will do something
 
   if (!item) {
     return (
@@ -33,7 +33,7 @@ export default function BookingItem(props) {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg bg-secondary shadow-sm mb-4 transition duration-200">
+    <div className="flex flex-col w-[40%] sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg bg-secondary shadow-sm mb-4 transition duration-200 ">
       {/* Product Image */}
       <img
         src={item.image[0]}
@@ -45,9 +45,43 @@ export default function BookingItem(props) {
       <div className="flex-1">
         <h3 className="text-lg font-semibold text-accent">{item.name}</h3>
         <p className="text-sm text-gray-600">{item.category}</p>
-        <p className="mt-1 text-sm text-gray-700">Qty: <span className="font-medium">{qty}</span></p>
+        <div className="mt-2 text-sm text-gray-700 flex items-center space-x-3">
+          <span className="font-semibold">Qty:</span>
+
+          <div className="flex items-center bg-white border border-accent rounded-full shadow-sm px-2 py-1">
+            <button
+              className="p-2 text-gray-600 hover:text-red-500 transition"
+              onClick={() => {
+                  if (qty == 1) {
+                    removeFromCart(itemKey);
+                    refresh();
+                  }
+                  else {
+                    addToCart(itemKey, -1);
+                    refresh();
+                  }
+
+              }}
+            >
+              <FaMinus className="w-3 h-3" />
+            </button>
+
+            <span className="mx-3 text-base font-semibold">{qty}</span>
+
+            <button
+              className="p-2 text-gray-600 hover:text-green-600 transition"
+              onClick={() => {
+                addToCart(itemKey, +1);
+                refresh();
+              }}
+            >
+              <FaPlus className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
         <p className="mt-1 text-sm text-gray-700">
-          Price: <span className="font-medium">LKR.{item.price.toFixed(2)}</span>
+          Price:{" "}
+          <span className="font-medium">LKR.{item.price.toFixed(2)}</span>
         </p>
         <p className="mt-1 text-sm font-semibold text-accent">
           Total: LKR.{(item.price * qty).toFixed(2)}
@@ -68,73 +102,6 @@ export default function BookingItem(props) {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 // import { removeFromCart } from "../utils/cart";
@@ -144,16 +111,16 @@ export default function BookingItem(props) {
 //     const [item, setItem] = useState(null);
 //     const [status, setStatus] = useState("loading");        //loading, success, error
 
-//     useEffect (()=>{        //page refresh 
+//     useEffect (()=>{        //page refresh
 //         if (status == "loading") {          //if status is loading
-//             axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`).then((res)=>{         //fetch the data 
+//             axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`).then((res)=>{         //fetch the data
 //                 setItem(res.data);              //set the item
 //                 console.log(res.data);
 //                 setItem("success");             //set status to success
-//             }).catch((err)=>{                    
-//                 console.log(err);               
-//                 removeFromCart(itemKey);        //If its error then remove item from cart  
-//                 refresh();                      //refresh cart      
+//             }).catch((err)=>{
+//                 console.log(err);
+//                 removeFromCart(itemKey);        //If its error then remove item from cart
+//                 refresh();                      //refresh cart
 //             })
 //         }
 //     },[status]);      //useEffect will run when status changes. depending on status we will do something

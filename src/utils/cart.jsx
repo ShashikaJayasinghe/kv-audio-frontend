@@ -33,13 +33,21 @@ export function addToCart (key, qty) {      //add to cart
     localStorage.setItem("cart", cartString);           //save the cart in localstorage
 }
 
-export function removeFromCart (key) {
-    const cart = loadCart();    //load cart from localstorage
-    const newCart = cart.orderedItems.filter((item)=>{item.key != key})     //remove item from cart
-    cart.orderedItems = newCart;    //update cart
-    const cartString = JSON.stringify(cart);        //get cart string and now we can save the cart in localstorage
-    localStorage.setItem("cart", cartString);           //save the cart in localstorage
-}
+export function removeFromCart(key) {
+    const cart = loadCart(); // load cart from localStorage
+    const newCart = cart.orderedItems.filter((item) => item.key !== key); // remove item from cart
+    cart.orderedItems = newCart;        // update cart
+    const cartString = JSON.stringify(cart); // get cart string and now we can save the cart in localstorage
+    localStorage.setItem("cart", cartString); // save the cart in localstorage
+  }
+
+// export function removeFromCart (key) {
+//     const cart = loadCart();    //load cart from localstorage
+//     const newCart = cart.orderedItems.filter((item)=>{item.key !== key})     //remove item from cart
+//     cart.orderedItems = newCart;    //update cart
+//     const cartString = JSON.stringify(cart);        //get cart string and now we can save the cart in localstorage
+//     localStorage.setItem("cart", cartString);           //save the cart in localstorage
+// }
 
 export function formatDate(date) {
     const year = date.getFullYear();

@@ -9,6 +9,7 @@ export default function BookingPage () {
     function reloadCart () {
         setCart(loadCart());        //reload cart   it means again run setCart const [cart, setCart] = useState(loadCart()) full page resfresh
     }
+    
 
     return (
         <div className="w-full h-full flex flex-col items-center">

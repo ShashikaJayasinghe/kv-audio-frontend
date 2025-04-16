@@ -32,8 +32,8 @@ export default function BookingItem(props) {
     );
   }
 
-  return (
-    <div className="flex flex-col w-[40%] sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg bg-secondary shadow-sm mb-4 transition duration-200 ">
+  return (    
+    <div className="flex flex-col w-full sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg bg-secondary shadow-sm mb-4 transition duration-200 ">
       {/* Product Image */}
       <img
         src={item.image[0]}

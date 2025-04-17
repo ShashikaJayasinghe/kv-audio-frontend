@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { formatDate, loadCart } from "../../utils/cart"
 import BookingItem from "../../components/bookingItem";
 import axios from "axios";
@@ -12,10 +12,31 @@ export default function BookingPage () {
 
     const [startingDate, setStartingDate] = useState(today);
     const [endingDate, setEndingDate] = useState(tomorrow);
+    const [total, setTotal] = useState(0);
 
     function reloadCart () {
         setCart(loadCart());
+        calculateTotal();
     }
+
+    function calculateTotal () {
+        const cartInfo = loadCart();
+        cartInfo.startingDate = startingDate;       
+        cartInfo.endingDate = endingDate;   //frontend to backend
+        cartInfo.days = daysBetween;
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders/quote`,
+            cartInfo       
+        ).then ((res)=>{
+            console.log(res.data);
+            setTotal(res.data.total);
+        }).catch ((err)=>{
+            console.log(err);
+        })
+    }
+
+    useEffect (()=>{
+        calculateTotal();       //use first time to calculate total
+    },[startingDate, endingDate])       //useEffect will run when startingDate or endingDate changes
     function handleBookingCreation () {
         const cart = loadCart();        // we are sending booking as a cart
         cart.startingDate = startingDate;       // frontend to backend(const [startingDate, setStartingDate] = useState(today);)
@@ -93,6 +114,14 @@ export default function BookingPage () {
                     ))
                 }
             </div>
+
+            <div className="w-full max-w-xl mt-4">
+  <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col sm:flex-row justify-between items-center">
+    <h3 className="text-sm font-medium text-accent mb-2 sm:mb-0">Total Amount</h3>
+    <p className="text-xl font-bold text-accent tracking-tight">{total.toFixed(2)}</p>
+  </div>
+</div>
+
 
             <div className="w-full flex justify-center mt-4">
                 <button className="w-[200px] h-[50px] bg-blue-500 text-secondary py-2 mb-4 rounded-lg hover:bg-blue-600 transition" onClick={handleBookingCreation}>Create Booking</button>

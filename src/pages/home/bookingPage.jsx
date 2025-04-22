@@ -116,13 +116,11 @@ export default function BookingPage () {
             </div>
 
             <div className="w-full max-w-xl mt-4">
-  <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col sm:flex-row justify-between items-center">
-    <h3 className="text-sm font-medium text-accent mb-2 sm:mb-0">Total Amount</h3>
-    <p className="text-xl font-bold text-accent tracking-tight">{total.toFixed(2)}</p>
-  </div>
-</div>
-
-
+                <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col sm:flex-row justify-between items-center">
+                    <h3 className="text-sm font-medium text-accent mb-2 sm:mb-0">Total Amount</h3>
+                    <p className="text-xl font-bold text-accent tracking-tight">{total.toFixed(2)}</p>
+                </div>
+                </div>
             <div className="w-full flex justify-center mt-4">
                 <button className="w-[200px] h-[50px] bg-blue-500 text-secondary py-2 mb-4 rounded-lg hover:bg-blue-600 transition" onClick={handleBookingCreation}>Create Booking</button>
             </div>

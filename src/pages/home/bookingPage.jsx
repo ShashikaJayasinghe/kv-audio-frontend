@@ -28,7 +28,7 @@ export default function BookingPage () {
             cartInfo       
         ).then ((res)=>{
             console.log(res.data);
-            setTotal(res.data.total);
+            setTotal(res.data.total);       
         }).catch ((err)=>{
             console.log(err);
         })
@@ -46,12 +46,12 @@ export default function BookingPage () {
         const token = localStorage.getItem("token");
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, cart, {
             headers : {
-                Authorization : `Bearer ${token}`
+                Authorization : `Bearer ${token}`       //backend to frontend
             }
         }).then((res) => {
             console.log(res.data);
             localStorage.removeItem("cart");
-            toast.success("Booking Success");
+            toast.success("Booking Success");       
             setCart(loadCart());
         }).catch((err) => {
             console.log(err);

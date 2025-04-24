@@ -28,7 +28,7 @@ export default function BookingPage () {
             cartInfo       
         ).then ((res)=>{
             console.log(res.data);
-            setTotal(res.data.total);
+            setTotal(res.data.total);       
         }).catch ((err)=>{
             console.log(err);
         })
@@ -46,12 +46,12 @@ export default function BookingPage () {
         const token = localStorage.getItem("token");
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, cart, {
             headers : {
-                Authorization : `Bearer ${token}`
+                Authorization : `Bearer ${token}`       //backend to frontend
             }
-        }).then((res) => {
+        }).then((res) => {      //backend to frontend
             console.log(res.data);
             localStorage.removeItem("cart");
-            toast.success("Booking Success");
+            toast.success("Booking Success");       
             setCart(loadCart());
         }).catch((err) => {
             console.log(err);
@@ -116,13 +116,11 @@ export default function BookingPage () {
             </div>
 
             <div className="w-full max-w-xl mt-4">
-  <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col sm:flex-row justify-between items-center">
-    <h3 className="text-sm font-medium text-accent mb-2 sm:mb-0">Total Amount</h3>
-    <p className="text-xl font-bold text-accent tracking-tight">{total.toFixed(2)}</p>
-  </div>
-</div>
-
-
+                <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col sm:flex-row justify-between items-center">
+                    <h3 className="text-sm font-medium text-accent mb-2 sm:mb-0">Total Amount</h3>
+                    <p className="text-xl font-bold text-accent tracking-tight">{total.toFixed(2)}</p>
+                </div>
+                </div>
             <div className="w-full flex justify-center mt-4">
                 <button className="w-[200px] h-[50px] bg-blue-500 text-secondary py-2 mb-4 rounded-lg hover:bg-blue-600 transition" onClick={handleBookingCreation}>Create Booking</button>
             </div>

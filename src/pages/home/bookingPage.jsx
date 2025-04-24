@@ -48,7 +48,7 @@ export default function BookingPage () {
             headers : {
                 Authorization : `Bearer ${token}`       //backend to frontend
             }
-        }).then((res) => {
+        }).then((res) => {      //backend to frontend
             console.log(res.data);
             localStorage.removeItem("cart");
             toast.success("Booking Success");       

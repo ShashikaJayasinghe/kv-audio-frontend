@@ -19,7 +19,7 @@ export default function ProductCard({ item }) {
                 </p>
                 <hr />
                 <div>
-                    <Link to={"/product/"+item.key}
+                    <Link to={"/product/"+item.key}     //link to product details
                         className={`h-[40px] w-full absolute left-0 bottom-0 py-3 rounded-lg text-white font-semibold transition duration-300 flex items-center justify-center gap-2 ${item.availability ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
                         disabled={!item.availability}
                     >

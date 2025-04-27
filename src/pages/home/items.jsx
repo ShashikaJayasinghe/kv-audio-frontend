@@ -33,9 +33,9 @@ export default function Items () {
             }
             {
                 state=="success"&&
-                items.map((item)=>{
+                items.map((item)=>{     //map the items
                     return (
-                        <ProductCard key={item.key} item={item} />
+                        <ProductCard key={item.key} item={item} />      
                     )
                 })
             }

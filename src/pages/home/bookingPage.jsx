@@ -26,7 +26,7 @@ export default function BookingPage () {
         cartInfo.days = daysBetween;
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders/quote`,
             cartInfo       
-        ).then ((res)=>{
+        ).then ((res)=>{        //backend to frontend
             console.log(res.data);
             setTotal(res.data.total);       
         }).catch ((err)=>{

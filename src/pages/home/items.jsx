@@ -3,10 +3,10 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import ProductCard from "../../components/productCard";
 
-export default function Items () {
+export default function Items () {      
 
     const [state, setState] = useState("loading") //loading, success, error
-    const [items, setItems] = useState([]) 
+    const [items, setItems] = useState([])             // useState 
     
     useEffect(()=>{
         if (state == "loading") {

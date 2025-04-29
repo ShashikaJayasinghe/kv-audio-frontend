@@ -6,12 +6,12 @@ import ProductCard from "../../components/productCard";
 export default function Items () {      
 
     const [state, setState] = useState("loading") //loading, success, error
-    const [items, setItems] = useState([])             // useState 
+    const [items, setItems] = useState([])             // useState
     
     useEffect(()=>{
         if (state == "loading") {
             axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`).then((res)=>{     //fetch the data
-                console.log(res.data);
+                console.log(res.data);      //print the data
                 setItems(res.data);
                 setState("success");
             }).catch((err)=>{

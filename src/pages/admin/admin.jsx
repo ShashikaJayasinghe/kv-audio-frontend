@@ -5,6 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import AdminItemsPage from "./adminItems";
 import AddItemPage from "./addItemPage";
 import UpdateItemPage from "./updateItemPage";
+import AdminUsersPage from "./adminUsersPage";
 
 export default function AdminPage () {
     return (
@@ -20,9 +21,10 @@ export default function AdminPage () {
         <Routes path="/*">
         
           <Route path="/bookings" element={<h1>Booking Page</h1>}></Route>
+          <Route path="/users" element={<AdminUsersPage />}></Route>
           <Route path="/items" element={<AdminItemsPage />}></Route>
-          <Route path="/items/add" element={<AddItemPage />}/>
-          <Route path="/items/edit" element={<UpdateItemPage />} />
+          <Route path="/items/add" element={<AddItemPage />}></Route>
+          <Route path="/items/edit" element={<UpdateItemPage />} ></Route>
         
         </Routes>
       </div>

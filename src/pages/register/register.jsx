@@ -34,7 +34,7 @@ export default function RegisterPage() {
     return (
         <div className="bg-picture h-screen flex justify-center items-center">
             <form onSubmit={onHandleSubmit} className="w-[400px] bg-white bg-opacity-20 p-8 rounded-3xl shadow-lg backdrop-blur-lg flex flex-col items-center">
-                <img src="/logo.png" alt="logo" className="w-[120px] h-[120px] mb-6 animate-bounce" />
+                <img src="/logo.png" alt="logo" className="w-[120px] h-[120px] mb-6" />
                 <h2 className="text-white text-2xl font-bold mb-4">Create an Account</h2>
                 <input type="text" placeholder="First Name" className="w-full px-4 py-3 mb-3 bg-transparent border-b-2 border-white text-white text-lg outline-none placeholder-white focus:border-teal-300 transition" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 <input type="text" placeholder="Last Name" className="w-full px-4 py-3 mb-3 bg-transparent border-b-2 border-white text-white text-lg outline-none placeholder-white focus:border-teal-300 transition" value={lastName} onChange={(e) => setLastName(e.target.value)} />

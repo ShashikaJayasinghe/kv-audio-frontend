@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export default function BookingPage () {
-    const [cart, setCart] = useState(loadCart());
+    const [cart, setCart] = useState(loadCart());       //load cart
 
     const today = formatDate(new Date());
     const tomorrow = formatDate(new Date(Date.now() + 24 * 60 * 60 * 1000));

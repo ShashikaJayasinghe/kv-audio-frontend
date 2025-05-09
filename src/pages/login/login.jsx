@@ -1,13 +1,40 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import "./login.css"
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage () {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");        //array
     const navigate = useNavigate();                     //function
+    const googleLogin = useGoogleLogin(                                                                                                             
+        {
+            onSuccess : (res)=>{
+                console.log(res);
+                toast.success("Login Success");
+                navigate("/");
+                axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/google`,{     // we send backend received from the token in g
+                    accessToken : res.access_token      //access token name should be backend end point name(accessToken), res.access_token is google access token means console.log it comes access_token  
+                }).then((res)=>{
+                    console.log(res);
+                    toast.success("Login Success");
+                    const user = res.data.user;
+                    localStorage.setItem("token",res.data.token);        //token save when login a user
+
+                    if (user.role === "admin") {
+                        navigate("/admin/");
+                    }else {
+                        navigate("/");
+                    }
+                }).catch ((err)=>{
+                    console.log(err);
+                    toast.error(err.response.data.error);
+                })
+            }
+        }
+    );
 
     function onHandleSubmit (event) {
         event.preventDefault();
@@ -21,6 +48,11 @@ export default function LoginPage () {
             toast.success("Login Success");
             const user = res.data.user;
             localStorage.setItem("token", res.data.token);        //token save when login a user
+
+            if (user.emailVerified === false) {
+                        navigate("/verify-email");
+                        return;
+                    }
 
             if (user.role === "admin") {
                 navigate("/admin/");
@@ -46,6 +78,7 @@ export default function LoginPage () {
                     setPassword(event.target.value);
                 }}/>
                 <button className="w-[300px] h-[50px] my-4 bg-[#36bbbf] text-xl text-white rounded-lg">Login</button>
+                <div className="w-[300px] h-[50px] my-4 bg-[#36bbbf] text-xl text-white rounded-lg" onClick={googleLogin}>Login with Google</div>
             </div>
         </form>
     </div>

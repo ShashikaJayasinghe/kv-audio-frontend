@@ -1,16 +1,28 @@
+import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import MobileNavPanel from "./mobileNavPanel";
 
 export default function Header () {
+    const [navPanelOpen, setNavPanelOpen] = useState(false);
     return(
-        <header className="w-full h-[100px] shadow-xl flex justify-center items-center relative bg-accent text-secondary">
-            <img src="logo.png" alt="Logo" className="w-[100px] h-[100px] object-cover absolute left-3 top-1"/>
-            <Link to="/" className="text-[25px] font-bold m-1">Home</Link>
-            <Link to="/contact" className="text-[25px] font-bold m-1">Contact</Link>
-            <Link to="/gallery" className="text-[25px] font-bold m-1">Gallery</Link>
-            <Link to="/items" className="text-[25px] font-bold m-1">Items</Link>
-            <Link to="/reviews" className="text-[25px] font-bold m-1">Review</Link>
-            <Link to="/booking" className="text-[25px] font-bold m-1 absolute right-3"><FaShoppingCart /></Link>
+        <header className="w-full h-[70px] shadow-xl flex justify-center items-center relative bg-accent text-secondary">
+            <img src="/logo.png" alt="Logo" className="w-[80px] h-[80px] object-cover absolute left-1 top-1"/>
+            <div className="hidden w-[450px] md:flex justify-evenly items-center">
+                <Link to="/" className="hidden md:block text-[22px]  m-1">Home</Link>
+                <Link to="/contact" className="hidden md:block text-[22px]  m-1">Contact</Link>
+                <Link to="/gallery" className="hidden md:block text-[22px]  m-1">Gallery</Link>
+                <Link to="/items" className="hidden md:block text-[22px]  m-1">Items</Link>
+                <Link to="/reviews" className="hidden md:block text-[22px]  m-1">Review</Link>
+                <Link to="/booking" className="hidden md:block text-[22px]  m-1 absolute right-12"><FaShoppingCart /></Link>
+            </div>
+            <GiHamburgerMenu className="absolute right-5 text-[25px] md:hidden" 
+            onClick={()=>{
+                setNavPanelOpen(true);
+            }}/>
+            <MobileNavPanel isOpen={navPanelOpen} setOpen={setNavPanelOpen} />      
         </header>
     )
 }
+

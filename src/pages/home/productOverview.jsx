@@ -31,13 +31,13 @@ export default function ProductOverview(){
             )}
             {
                 loadingStatus == "loaded" && (
-                <div className="w-full mt-4 flex flex-col justify-center items-center">
-                    <h1 className="text-xl font-bold text-accent text-center">{product.name}</h1>
-                    <div className="w-full p-4">
+                <div className="w-full mt-4 flex flex-col md:flex-row justify-center items-center">
+                    <h1 className="text-2xl my-6 md:hidden font-bold text-accent text-center">{product.name}</h1>
+                    <div className="w-full p-4 md:w-[49%]">
                         <ImageSlider images={product.image} />
                     </div>
-                    <div className="w-[49%] flex flex-col items-center">
-                        <h1 className="hidden text-3xl font-bold text-accent">{product.name}</h1>
+                    <div className="w-full md:[49%] flex flex-col items-center">
+                        <h1 className="hidden md:block text-3xl font-bold text-accent">{product.name}</h1>
                         <h2 className="text-xl font-semibold text-gray-800">{product.category} category</h2>
                         <p className="text-gray-700 mt-4">{product.description}</p>
                         <p className="text-lg font-semibold text-center text-green-500">LKR. {product.price.toFixed(2)}</p>

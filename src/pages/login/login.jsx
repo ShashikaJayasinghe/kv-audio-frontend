@@ -23,7 +23,7 @@ export default function LoginPage () {
                     const user = res.data.user;
                     localStorage.setItem("token",res.data.token);        //token save when login a user
 
-                    if (user.role === "admin") {
+                    if (user.role === "admin") {        // if user is admin
                         navigate("/admin/");
                     }else {
                         navigate("/");

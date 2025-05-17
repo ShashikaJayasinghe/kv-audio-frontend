@@ -5,8 +5,8 @@ export default function VerifyEmail () {
     const token = localStorage.getItem("token");        
     useEffect (()=>{
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/sendOTP`,{     // send otp to user
-            headers : {
-                Authorization : `Bearer ${token}`
+            headers : {                             // backend to frontend
+                Authorization : `Bearer ${token}`       
             }
         }).then((res) => {
             console.log(res);            

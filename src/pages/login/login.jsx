@@ -69,16 +69,25 @@ export default function LoginPage () {
     return(
     <div className="bg-picture w-full h-screen flex justify-center items-center">
         <form onSubmit={onHandleSubmit}>
-            <div className="w-[400px] h-[400px] backdrop-blur-xl rounded-2xl flex flex-col justify-center items-center relative">
-                <img src="/logo.png" alt="logo" className="w-[150px] h-[150px] absolute top-1 object-cover mt-4" />
-                <input type="email" placeholder="Email" className="w-[300px] h-[30px] mt-6 bg-transparent border-b-2 border-white text-white text-lg outline-none" value={email} onChange={(event)=>{
+            <div className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] backdrop-blur-xl rounded-2xl flex flex-col justify-center items-center relative]">
+                <img src="/logo.png" alt="logo" className="w-[100px] h-[100px] absolute top-1 object-cover pb-[40px] md:w-[150px] md:h-[150px]" />
+                <input type="email" placeholder="Email" className="w-[200px] h-[30px] mt-6 bg-transparent border-b-2 border-white text-white text-lg outline-none md:w-[300px]" value={email} onChange={(event)=>{
                     setEmail(event.target.value);
                 }}/>
-                <input type="password" placeholder="Password" className="w-[300px] h-[30px] mt-6 bg-transparent border-b-2 border-white text-white text-lg outline-none" value={password} onChange={(event)=>{
+                <input type="password" placeholder="Password" className="w-[200px] h-[30px] mt-4 bg-transparent border-b-2 border-white text-white text-lg outline-none md:w-[300px]" value={password} onChange={(event)=>{
                     setPassword(event.target.value);
                 }}/>
-                <button className="w-[300px] h-[50px] my-4 bg-[#36bbbf] text-xl text-white rounded-lg">Login</button>
-                <div className="w-[300px] h-[50px] my-4 bg-[#36bbbf] text-xl text-white rounded-lg" onClick={googleLogin}>Login with Google</div>
+                <button className="w-[200px] h-[30px] my-4 bg-accent text-xs text-white rounded-lg md:w-[300px] md:h-[40px] md:text-lg md:hover:bg-blue-600">Login</button>
+                <button
+                    onClick={googleLogin}
+                    className="w-[200px] h-[30px] my-1 bg-secondary text-xs text-[#3c4043] border border-[#dadce0] rounded-lg flex justify-center items-center gap-2 hover:bg-gray-100 cursor-pointer transition md:w-[300px] md:h-[40px] md:text-lg md:hover:bg-gray-200">
+                    <img
+                        src="/g-logo.png"
+                        alt="Google Logo"
+                        className="w-5 h-5"/>
+                            Login with Google
+                </button>
+
             </div>
         </form>
     </div>

@@ -22,8 +22,8 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      if (res.ok) {
+      const data = await res.json();    // data is the response from the backend
+      if (res.ok) {   // if response is ok
         toast.success("Message sent successfully.");
         setStatus("Message sent successfully.");
         setFormData({ name: "", email: "", message: "" });

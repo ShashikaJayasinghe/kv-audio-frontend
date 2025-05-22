@@ -32,7 +32,7 @@ export default function Contact() {
         setStatus(data.error || "Something went wrong.");
       }
     } catch (error) {
-      console.error(error);
+      console.error(error);   // if there is an error
       setStatus("Network error. Please try again later.");
     }
   };

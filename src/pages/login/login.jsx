@@ -79,7 +79,7 @@ export default function LoginPage () {
                 }}/>
                 <button className="w-[200px] h-[30px] my-4 bg-accent text-xs text-white rounded-lg md:w-[300px] md:h-[40px] md:text-lg md:hover:bg-blue-600">Login</button>
                 <button
-                    onClick={googleLogin}
+                    onClick={googleLogin}       // googleLogin is a function
                     className="w-[200px] h-[30px] my-1 bg-secondary text-xs text-[#3c4043] border border-[#dadce0] rounded-lg flex justify-center items-center gap-2 hover:bg-gray-100 cursor-pointer transition md:w-[300px] md:h-[40px] md:text-lg md:hover:bg-gray-200">
                     <img
                         src="/g-logo.png"

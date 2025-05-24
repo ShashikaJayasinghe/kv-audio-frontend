@@ -6,7 +6,7 @@ import { addToCart, loadCart } from "../../utils/cart";
 import toast from "react-hot-toast";
 
 export default function ProductOverview(){
-    const params = useParams();
+    const params = useParams();     // parse url
     const key = params.key;
     const [loadingStatus, setLoadingStatus] = useState("loading");
     const [product, setProduct] = useState({});

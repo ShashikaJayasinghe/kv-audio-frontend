@@ -6,9 +6,9 @@ import { addToCart, loadCart } from "../../utils/cart";
 import toast from "react-hot-toast";
 
 export default function ProductOverview(){
-    const params = useParams();
+    const params = useParams();     // parse url
     const key = params.key;
-    const [loadingStatus, setLoadingStatus] = useState("loading");
+    const [loadingStatus, setLoadingStatus] = useState("loading");  // loading status 
     const [product, setProduct] = useState({});
 
 
@@ -30,7 +30,7 @@ export default function ProductOverview(){
                     </div>
             )}
             {
-                loadingStatus == "loaded" && (
+                loadingStatus == "loaded" && (      // if the product is loaded
                 <div className="w-full mt-4 flex flex-col md:flex-row justify-center items-center">
                     <h1 className="text-2xl my-6 md:hidden font-bold text-accent text-center">{product.name}</h1>
                     <div className="w-full p-4 md:w-[49%]">

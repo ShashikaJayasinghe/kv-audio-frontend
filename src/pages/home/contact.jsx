@@ -22,8 +22,8 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      if (res.ok) {
+      const data = await res.json();    // data is the response from the backend
+      if (res.ok) {   // if response is ok
         toast.success("Message sent successfully.");
         setStatus("Message sent successfully.");
         setFormData({ name: "", email: "", message: "" });
@@ -32,7 +32,7 @@ export default function Contact() {
         setStatus(data.error || "Something went wrong.");
       }
     } catch (error) {
-      console.error(error);
+      console.error(error);   // if there is an error
       setStatus("Network error. Please try again later.");
     }
   };
@@ -131,3 +131,5 @@ export default function Contact() {
     </div>
   );
 }
+
+// export default Contact

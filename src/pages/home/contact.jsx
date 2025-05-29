@@ -4,8 +4,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+export default function Contact() { 
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });   // form data
   const [status, setStatus] = useState(null);
 
   const handleChange = (e) => {

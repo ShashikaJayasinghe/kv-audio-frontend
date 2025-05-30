@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ImageSlider (props) {
+export default function ImageSlider (props) {       // props is an object
     const images = props.images;
     console.log(images);
     const [selectedImage, setSelectedImage] = useState(images[0]);      

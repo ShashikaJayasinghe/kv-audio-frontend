@@ -9,7 +9,7 @@ export default function BookingItem(props) {
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
-    if (status === "loading") {
+    if (status === "loading") {   // if status is loading
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`)
         .then((res) => {

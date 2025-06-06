@@ -14,7 +14,7 @@ export default function BookingItem(props) {
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`)
         .then((res) => {
           setItem(res.data);
-          setStatus("success");
+          setStatus("success");   //set status to success
         })
         .catch((err) => {
           console.log(err);

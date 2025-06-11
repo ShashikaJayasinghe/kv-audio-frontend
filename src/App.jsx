@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Toaster position='top-right'/>
           <Routes path="/*">
-            <Route path='/testing' element={<Testing />}></Route> 
+            <Route path='/testing' element={<Testing />}></Route>    
             <Route path='/login' element={<LoginPage />}></Route>
             <Route path='/register' element={<RegisterPage />}/>
             <Route path='/verify-email' element={<VerifyEmail />}/>

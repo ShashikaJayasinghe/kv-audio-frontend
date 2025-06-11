@@ -17,7 +17,7 @@ export default function AdminPage () {
       if (!token) {
         window.location.href = "/login";
       }
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{    // getting user data ok
         headers : {
           Authorization : `Bearer ${token}`
         }

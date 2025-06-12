@@ -13,7 +13,7 @@ import axios from "axios";
 export default function AdminPage () {
     const [userValidated, setUserValidated] = useState(false);    
     useEffect (()=>{
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");    // getting token from local storage
       if (!token) {
         window.location.href = "/login";
       }

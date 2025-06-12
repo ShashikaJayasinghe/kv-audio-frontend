@@ -19,7 +19,7 @@ export default function AdminPage () {
       }
       axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{    // getting user data ok
         headers : {
-          Authorization : `Bearer ${token}`
+          Authorization : `Bearer ${token}`   //token is backend to frontend
         }
       }).then((res) => {
         console.log(res.data);

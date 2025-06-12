@@ -12,7 +12,7 @@ export default function AddItemPage() {
   const [productDescription, setProductDescription] = useState("");
   const navigate = useNavigate();
 
-  async function handleAddItem () {
+  async function handleAddItem () {   // async function to add item
     console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
     const token = localStorage.getItem("token")
 

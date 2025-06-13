@@ -18,7 +18,7 @@ export default function AddItemPage() {
 
     if (token) {
         try{
-            const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
+            const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{    //axios call
                 key : productKey,
                 name : productName,
                 price : productPrice,

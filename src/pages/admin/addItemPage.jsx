@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/mediaUpload";
 
 export default function AddItemPage() {
   const [productKey, setProductKey] = useState("");
@@ -10,21 +11,53 @@ export default function AddItemPage() {
   const [productCategory, setProductCategory] = useState("audio");
   const [productDimension, setProductDimension] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const [productImages, setProductImages] = useState([])  //To store multiple files
   const navigate = useNavigate();
 
+
   async function handleAddItem () {   // async function to add item
+  async function handleAddItem () {
+    const promises = []
+
+    for (let i = 0; i<productImages.length; i++) {
+      console.log(productImages[i])
+      const promise = mediaUpload(productImages[i])
+      promises.push(promise);
+      // if (i == 5) {
+      //   toast.error("You can only upload 5 pictures at a time");
+      //   break;
+      // }
+    }
+
+    // Promise.all(promises).then((result)=>{
+    //   console.log(result)
+    // }).catch((err)=>{
+    //   toast.error(err)
+    // })
+
+
     console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
     const token = localStorage.getItem("token")
 
     if (token) {
         try{
             const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{    //axios call
+            // Promise.all(promises).then((result)=>{
+            //   console.log(result)
+            // }).catch((err)=>{
+            //     toast.error(err)
+            // })
+            
+            const imageUrls = await Promise.all(promises);
+
+            const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
                 key : productKey,
                 name : productName,
                 price : productPrice,
                 category : productCategory,
                 dimensions : productDimension,
-                description : productDescription
+                description : productDescription,
+                image : imageUrls,
             },
             {
                 headers : {
@@ -59,6 +92,7 @@ export default function AddItemPage() {
         </select>
         <input className="p-2 border rounded-lg" type="text" placeholder="Product Dimensions" value={productDimension} onChange={(e) => setProductDimension(e.target.value)} />
         <input className="p-2 border rounded-lg" type="text" placeholder="Product Description" value={productDescription} onChange={(e) => setProductDescription(e.target.value)} />
+        <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="p-2 border rounded-lg" />
         <button onClick={handleAddItem} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl">Add</button>
         <button onClick={()=>{navigate("/admin/items/")}} className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl">Cancel</button>
       </div>

@@ -22,10 +22,10 @@ export default function Header () {
             onClick={()=>{
                 setNavPanelOpen(true);
             }}/>
-            {token != null &&<button className="hidden md:block absolute right-5 text-[25px]" onClick={()=>{        // if token is have then show the logout
+            {token != null &&<button className="hidden md:block absolute right-5 text-[20px]" onClick={()=>{        // if token is have then show the logout
                 localStorage.removeItem("token");
                 window.location.href = "/login";
-            }}>logout</button>}
+            }}>Logout</button>}
             <MobileNavPanel isOpen={navPanelOpen} setOpen={setNavPanelOpen} />      
         </header>
     )

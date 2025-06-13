@@ -14,6 +14,8 @@ export default function AddItemPage() {
   const [productImages, setProductImages] = useState([])  //To store multiple files
   const navigate = useNavigate();
 
+
+  async function handleAddItem () {   // async function to add item
   async function handleAddItem () {
     const promises = []
 
@@ -33,11 +35,13 @@ export default function AddItemPage() {
     //   toast.error(err)
     // })
 
+
     console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
     const token = localStorage.getItem("token")
 
     if (token) {
         try{
+            const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{    //axios call
             // Promise.all(promises).then((result)=>{
             //   console.log(result)
             // }).catch((err)=>{

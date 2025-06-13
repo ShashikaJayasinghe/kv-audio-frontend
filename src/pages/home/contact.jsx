@@ -109,7 +109,7 @@ export default function Contact() {
             </div>
             <div>
               <h3 className="text-xl font-semibold text-accent mb-2">Phone</h3>
-              <p>+94 77 123 4567</p>
+              <p>+94 (0)77 123 4567 | +94 (0)77 789 0123</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-accent mb-2">Email</h3>
@@ -117,8 +117,8 @@ export default function Contact() {
             </div>
             <div>
               <h3 className="text-xl font-semibold text-accent mb-2">Business Hours</h3>
-              <p>Mon – Fri: 9:00 AM – 6:00 PM</p>
-              <p>Sat – Sun: 10:00 AM – 4:00 PM</p>
+              <p>Monday – Friday : 9:00 AM – 6:00 PM</p>
+              <p className="mt-2 text-red-600">Saturday & Sunday : 10:00 AM – 4:00 PM</p>
             </div>
           </div>
         </div>

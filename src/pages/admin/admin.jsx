@@ -13,13 +13,13 @@ import axios from "axios";
 export default function AdminPage () {
     const [userValidated, setUserValidated] = useState(false);    
     useEffect (()=>{
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");    // getting token from local storage
       if (!token) {
         window.location.href = "/login";
       }
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{    // getting user data ok
         headers : {
-          Authorization : `Bearer ${token}`
+          Authorization : `Bearer ${token}`   //token is backend to frontend
         }
       }).then((res) => {
         console.log(res.data);

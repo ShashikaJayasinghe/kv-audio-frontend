@@ -1,3 +1,4 @@
+
 export default function Gallery() {
   const images = [
     { id: 1, url: "https://zbsvsutfimwxtndxamge.supabase.co/storage/v1/object/public/gallery//gallery1.jpg", alt: "Studio Monitor" },
@@ -30,3 +31,12 @@ export default function Gallery() {
     </div>
   );
 }
+
+export default function Gallery () {
+    return(
+        <div>
+            <h1>Gallery</h1>        
+        </div>
+    )
+}
+

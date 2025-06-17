@@ -11,25 +11,12 @@ export default function AddItemPage() {
   const [productCategory, setProductCategory] = useState("audio");
   const [productDimension, setProductDimension] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productImages, setProductImages] = useState([]); // To store multiple files
+  const [productImages, setProductImages] = useState([]);
   const navigate = useNavigate();
 
-  async function handleAddItem() {
-    // Validate required fields
-    if (!productKey || !productName || productPrice <= 0 || !productDescription) {
-      toast.error("Please fill all required fields");
-      return;
-    }
-
-    // Check if images are selected
-    if (productImages.length === 0) {
-      toast.error("Please select at least one image");
-      return;
-    }
-
-    // Limit the number of images
+  const handleAddItem = async () => {
     if (productImages.length > 5) {
-      toast.error("You can only upload 5 pictures at a time");
+      toast.error("You can only upload up to 5 images.");
       return;
     }
 
@@ -41,14 +28,9 @@ export default function AddItemPage() {
 
     try {
       // Upload all images
-      const uploadPromises = [];
-      for (let i = 0; i < productImages.length; i++) {
-        uploadPromises.push(mediaUpload(productImages[i]));
-      }
-
+      const uploadPromises = Array.from(productImages).map(file => mediaUpload(file));
       const imageUrls = await Promise.all(uploadPromises);
 
-      // Create the product
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/products`,
         {
@@ -71,11 +53,9 @@ export default function AddItemPage() {
       navigate("/admin/items");
     } catch (err) {
       console.error(err);
-      toast.error(
-        err.response?.data?.error || "An error occurred while adding the item"
-      );
+      toast.error(err?.response?.data?.error || "Something went wrong");
     }
-  }
+  };
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
@@ -87,7 +67,6 @@ export default function AddItemPage() {
           placeholder="Product Key"
           value={productKey}
           onChange={(e) => setProductKey(e.target.value)}
-          required
         />
         <input
           className="p-2 border rounded-lg"
@@ -95,7 +74,6 @@ export default function AddItemPage() {
           placeholder="Product Name"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
-          required
         />
         <input
           className="p-2 border rounded-lg"
@@ -103,14 +81,11 @@ export default function AddItemPage() {
           placeholder="Product Price"
           value={productPrice}
           onChange={(e) => setProductPrice(Number(e.target.value))}
-          min="0"
-          step="0.01"
-          required
         />
         <select
           className="p-2 border rounded-lg"
-          onChange={(e) => setProductCategory(e.target.value)}
           value={productCategory}
+          onChange={(e) => setProductCategory(e.target.value)}
         >
           <option value="audio">Audio</option>
           <option value="lights">Lights</option>
@@ -128,17 +103,12 @@ export default function AddItemPage() {
           placeholder="Product Description"
           value={productDescription}
           onChange={(e) => setProductDescription(e.target.value)}
-          required
         />
         <input
           type="file"
           multiple
-          onChange={(e) => {
-            setProductImages(Array.from(e.target.files));
-          }}
+          onChange={(e) => setProductImages(e.target.files)}
           className="p-2 border rounded-lg"
-          accept="image/*"
-          required
         />
         <button
           onClick={handleAddItem}
@@ -147,9 +117,7 @@ export default function AddItemPage() {
           Add
         </button>
         <button
-          onClick={() => {
-            navigate("/admin/items/");
-          }}
+          onClick={() => navigate("/admin/items/")}
           className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl"
         >
           Cancel
@@ -158,6 +126,8 @@ export default function AddItemPage() {
     </div>
   );
 }
+
+
 // import axios from "axios";
 // import { useState } from "react";
 // import toast from "react-hot-toast";

@@ -49,7 +49,7 @@ export default function LoginPage () {
             const user = res.data.user;
             localStorage.setItem("token", res.data.token);        
 
-            if (user.emailVerified === false) {
+            if (user.emailVerified === false) {     //user email verified false
                         navigate("/verify-email");
                         return;
                     }

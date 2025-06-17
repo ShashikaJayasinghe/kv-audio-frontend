@@ -85,7 +85,7 @@ export default function LoginPage () {
                         src="/g-logo.png"
                         alt="Google Logo"
                         className="w-5 h-5"/>
-                            Login with Google       // Updated button text
+                            Login with Google
                 </button>
                 
                 {/* Added register link */}

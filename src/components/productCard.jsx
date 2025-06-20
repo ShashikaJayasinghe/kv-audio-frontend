@@ -6,7 +6,7 @@ export default function ProductCard({ item }) {
             <img 
                 src={item.image[0]} 
                 alt={item.name || "Product Image"} 
-                className="w-full h-48 object-cover rounded-xl mb-4 transition-opacity hover:opacity-90"
+                className="w-full h-48 object-cover rounded-xl mb-4 transition-opacity hover:opacity-90"        // Add hover:opacity-90 class
             />
             <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">{item.name}</h2>

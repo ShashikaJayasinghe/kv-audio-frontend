@@ -15,7 +15,7 @@ export default function AdminPage () {
     useEffect (()=>{    //    useeffect use for validating user
       const token = localStorage.getItem("token");    // getting token from local storage
       if (!token) {
-        window.location.href = "/login";    
+        window.location.href = "/login";    //    navigate to login page
       }
       axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{    // getting user data ok
         headers : {

@@ -5,7 +5,7 @@ export default function ProductCard({ item }) {
         <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl relative p-6 w-80 transition-transform transform hover:scale-105 hover:shadow-2xl m-4 border border-gray-100 hover:border-blue-200 hover:ring-2 hover:ring-blue-300 duration-300">
             <img 
                 src={item.image[0]} 
-                alt={item.name || "Product Image"} 
+                alt={item.name || "Product Image"}      // Add alt attribute
                 className="w-full h-48 object-cover rounded-xl mb-4 transition-opacity hover:opacity-90"        // Add hover:opacity-90 class
             />
             <div className="text-center">

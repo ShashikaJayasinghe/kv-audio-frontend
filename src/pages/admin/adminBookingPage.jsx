@@ -34,7 +34,7 @@ export default function AdminOrdersPage() {
 
   function handleOrderStatusChange (orderId, status) {
     const token = localStorage.getItem("token");
-    axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`, 
+    axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,     //order id and status 
         { 
             status: status,
         }, 

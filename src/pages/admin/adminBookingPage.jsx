@@ -40,7 +40,7 @@ export default function AdminOrdersPage() {
         }, 
         {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`    //token
         }
     }).then(() => {
         console.log("Order status updated");
